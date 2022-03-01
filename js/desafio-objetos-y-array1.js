@@ -1,8 +1,8 @@
 //ejercicio clase 6  compras de productos
-/*entrada  ---- pedir al usuario que ingrese los productos que compro
-*/
-/*proceso   --- con los productos almacenarlo en un array y modificarlo(sarca algunos producto si el usuario lo requiere) */
-//salida mostrar todo por un alert / console
+//entrada  
+//proceso
+//proceso  
+
 
 // creo mi clase 
 class Productos {
