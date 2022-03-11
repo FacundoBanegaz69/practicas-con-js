@@ -1,5 +1,3 @@
-//titulo de BIENVENID0
-
 let title = document.getElementById("titulo");
 
 title.innerText = ("BIENVENIDO A LA TIENDA ONLINE!!!");
@@ -30,14 +28,14 @@ class Productos {
 
         let mensaje = document.getElementById("msj");
             let text = `El total de la compra + el "IVA" es de ${iva}`;
-            mensaje.innerText = text;
+            mensaje.innerHTML += text;
     }
     
         subTotal() {
             let subTotal = this.precioProducto * this.cantidadComprada;
             let mensaje2 = document.getElementById("msj2");
             let texto2 = `El subtotal de la compra sin el "IVA"  de ${this.tipoProducto} de la marca ${this.marcaProducto} es de:$${subTotal} pesos`;
-            mensaje2.innerText = texto2;
+            mensaje2.innerHTML += texto2;
     }
     
     actualizarStock() {
@@ -47,17 +45,17 @@ class Productos {
         if (actualizado > 0) {
             mensaje3 = document.getElementById("msj3");
             texto3 = ` Con la actualizacion el stock esta en ${actualizado} productos`;
-            mensaje3.innerText = texto3;
+            mensaje3.innerHTML += texto3;
         }
         else if (actualizado <= 0) { 
             mensaje3 = document.getElementById("msj3");
             texto3 = `El estock esta en ${actualizado} vacio, reponer urgentemente!!!`;
-            mensaje3.innerText = texto3;
+            mensaje3.innerHTML += texto3;
         }
         else if (actualizado != "") { 
             mensaje3 = document.getElementById("msj3");
             texto3 = ` debe ingresar el stock  de  productos para relizar la actulizacion`;
-            mensaje3.innerText = texto3;
+            mensaje3.innerHTML += texto3;
             
         }
     }
@@ -72,7 +70,7 @@ class Productos {
                         cantidad comprada: ${this.cantidadComprada},
                         Vencimiento: ${this.fechaVencimiento}`;
         
-            mostrar.innerText = info;
+            mostrar.innerHTML+= info;
             
     }
     estadoProducto() { 
@@ -83,17 +81,17 @@ class Productos {
             case "NO":
                 estado = document.getElementById("vencimiento");
                 verEstado = `El estado del producto: ${this.tipoProducto} marca ${this.marcaProducto} esta en buen estado "es apto para el consumo"`;
-                estado.innerHTML = verEstado;
+                estado.innerHTML += verEstado;
                 break;
             case "SI":
                 estado = document.getElementById("vencimiento");
                 verEstado = `El estado del producto: ${this.tipoProducto} marca ${this.marcaProducto} esta en mal estado "no se recomienda consumirlo"`;
-                estado.innerHTML = verEstado;
+                estado.innerHTML += verEstado;
                 break;
             default:
                 estado = document.getElementById("vencimiento");
                 verEstado = `El estado del producto ${this.tipoProducto} marca:  ${this.marcaProducto}  es deconocido: "POR FAVOR INGRESAR NUEVAMENTE LO ESTABLECIDO "`;
-                estado.innerHTML = verEstado;
+                estado.innerHTML += verEstado;
                 break;
         }
     }
@@ -125,7 +123,7 @@ Productos.mostrarDatos(),
 Productos.subTotal();
 Productos.actualizarStock();
 Productos.estadoProducto();
-Productos.sumarIva()
+    Productos.sumarIva();
 }
 
 //ver los productos ingresados
@@ -137,7 +135,7 @@ console.log(Productos1);
 let soloMarcas = Productos1.map(p => {
     marcas = document.getElementById("marcas")
     verMarcas = ` Los productos comprados son:${p.tipoProducto}, marca ${p.marcaProducto}`;
-    return marcas.innerText = verMarcas;
+    return marcas.innerHTML += verMarcas;
 });
 
 //meto el FIND  productos con vencimiento
@@ -148,12 +146,12 @@ let productosVencidos = Productos1.find(vencimiento => {
     if (vencimiento.fechaVencimiento == "SI") { 
         productoven = document.getElementById("vencimiento")
         mostrarVen = `El producto vencido es:${vencimiento.tipoProducto}, marca ${vencimiento.marcaProducto}, vencido ${vencimiento.fechaVencimiento}`;
-        productoven.innerText = mostrarVen;
+        productoven.innerHTML+= mostrarVen;
     }
     else if (vencimiento.fechaVencimiento == "NO") { 
         productoven = document.getElementById("vencimiento")
         mostrarVen = `EL producto :${vencimiento.tipoProducto}, marca ${vencimiento.marcaProducto},NO ESTA VENCIDO ${vencimiento.fechaVencimiento}`;
-        productoven.innerText = mostrarVen;
+        productoven.innerHTML += mostrarVen;
 
     }
 });
@@ -171,7 +169,7 @@ let productoCaro = Productos1.filter(producto => {
     if (producto.precioProducto >= 1000) { 
         caro = document.getElementById("caro");
         verProductoCaro = `El producto mas caro es: ${producto.tipoProducto}, marca ${producto.marcaProducto} su precio es de ${producto.precioProducto} pesos`;
-        caro.innerText = verProductoCaro;
+        caro.innerHTML += verProductoCaro;
 
     }
 });
@@ -184,6 +182,7 @@ let productoBarato = Productos1.filter(producto => {
     if (producto.precioProducto <= 950) { 
         barato = document.getElementById("caro");
         verProductoBarato = `El producto mas Barato es: ${producto.tipoProducto}, marca ${producto.marcaProducto} su precio es de ${producto.precioProducto} pesos`;
-        barato.innerText = verProductoBarato;
+        barato.innerHTML += verProductoBarato;
     }
 });
+
