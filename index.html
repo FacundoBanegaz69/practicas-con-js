@@ -7,33 +7,23 @@
     <title>DOM</title>
 </head>
 <body>
-        <h1 id="titulo"></h1>
-        <br>
-        <div id="mostrarDatos"></div>
-        <br>
-    <p id="msj"></p>
-    <br>
-    <p id="msj2"></p>
-    <br>
-    <p id="msj3"></p>
-    <br>
-    <p id="vencimiento"></p>
-    <br>
-    <p id="marcas"></p>
-    <br>
-    <p id="vencimiento"></p>
-    <br>
-    <p id="caro"></p>
-        <br>
-    <p id="barato"></p>
-        <br>
-    
+        <div class="contenedor" style="text-align:center;">
+        <h1>Lista De Tareas</h1>
+        <div class="tarea">
+            <form action="">
+                <input id="input" type=""placeholder="Agregar tarea a la lista">
+                <button class="btn-agregar">Añadir</button>
+            </form>
+            <div class="contenedor-mostrar">
+                <ul>
 
-
-
-
-    </section>
-
+                </ul>
+            </div>
+            <div class="div-vacio" id="vacio">
+                <p>No tienes Tareas Pendientes</p>
+            </div>
+        </div>
+    </div>
     <Script src="./js/dom.js"></Script>
 
 </body>
