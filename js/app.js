@@ -13,12 +13,15 @@ let carrito = {};
 
 // Eventos
 // El evento DOMContentLoaded es disparado cuando el documento HTML ha sido completamente cargado y parseado
-document.addEventListener("DOMContentLoaded", e => {
+document.addEventListener("DOMContentLoaded", () => {
     fetchData()
-    if (localStorage.getItem("carrito")) {
-        carrito = JSON.parse(localStorage.getItem("carrito"))
-        pintarCarrito()
-    }
+    // if (localStorage.getItem("carrito")) {
+    //     carrito = JSON.parse(localStorage.getItem("carrito"))
+    //     pintarCarrito()
+    // }
+     // aplico el operador avanzado or
+      carrito = JSON.parse(localStorage.getItem('carrito')) || {}
+      pintarCarrito()
 
 });
 
@@ -119,13 +122,18 @@ let pintarFooter = () => {
     //limpio
     footer.innerHTML = "";
     //si esta vacio
-    if (Object.keys(carrito).length === 0) {
-           //agrego el mensaje 
-        footer.innerHTML = `
-        <th scope="row" colspan="5">Carrito vacío,</th>
-        `
-        return
-    }
+    // if (Object.keys(carrito).length === 0) {
+    //        //agrego el mensaje 
+    //     footer.innerHTML = `
+    //     <th scope="row" colspan="5">Carrito vacío,</th>
+    //     `
+    //     return
+    // }
+     // aplico el operador avanzado &&
+     //aqui podria poner la libreria de alert
+    Object.keys(carrito).length === 0 && alert("Carrito vacío, Compre algun producto");
+
+
         // sumo cantidad y sumo total
     let sumaCantidad = Object.values(carrito).reduce((acumulador, { cantidad }) => acumulador + cantidad,0);
     
@@ -151,7 +159,7 @@ let btnAcciones = e => {
     if (e.target.classList.contains("btn-info")) {
     
         let producto = carrito[e.target.dataset.id];
-
+        //operador ++
         producto.cantidad++;
 
         carrito[e.target.dataset.id] = {...producto};
@@ -159,15 +167,18 @@ let btnAcciones = e => {
     } 
     if (e.target.classList.contains("btn-danger")) { 
 
-            let producto = carrito[e.target.dataset.id];
-
+        let producto = carrito[e.target.dataset.id];
+        
+         //operador --
         producto.cantidad--;
 
-        if (producto.cantidad === 0) {
-            delete carrito[e.target.dataset.id];
-        } else {
-            carrito[e.target.dataset.id] = {...producto}
-        }
+        // if (producto.cantidad === 0) {
+        //     delete carrito[e.target.dataset.id];
+        // } else {
+        //     carrito[e.target.dataset.id] = {...producto}
+        // }
+        //aplico el operador terneario
+        producto.cantidad === 0 ? delete carrito[e.target.dataset.id] : carrito[e.target.dataset.id] = {...producto}
         pintarCarrito();
     }
     e.stopPropagation();
