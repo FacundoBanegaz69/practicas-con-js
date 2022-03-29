@@ -1,4 +1,5 @@
 
+
 const cards = document.getElementById('cards')
 const items = document.getElementById('items')
 const footer = document.getElementById('footer')
@@ -19,30 +20,23 @@ document.addEventListener("DOMContentLoaded", () => {
     //     carrito = JSON.parse(localStorage.getItem("carrito"))
     //     pintarCarrito()
     // }
-     // aplico el operador avanzado or
-      carrito = JSON.parse(localStorage.getItem('carrito')) || {}
+        carrito = JSON.parse(localStorage.getItem('carrito')) || {}
       pintarCarrito()
 
 });
 
 cards.addEventListener("click", e => añadirAlCarrito(e))
 
-items.addEventListener("click", e => { 
-    btnAcciones(e);
-});
+items.addEventListener("click", e => btnAcciones(e));
 
 // Traer productos 
 
 // nota despues practicar con placeholder
-let fetchData = async () => { 
-    try {
-        //agrego mi json
-        let res = await fetch("api.json")
-        let data = await res.json()
-        pintarCards(data)
-    } catch (error) { 
-        console.log(error)
-    }
+const fetchData = async () => {
+    const res = await fetch('api.json');
+    const data = await res.json()
+    // console.log(data)
+    pintarCards(data)
 }
 
 // Mostrar productos
@@ -111,17 +105,15 @@ let pintarCarrito = () => {
     });
     items.appendChild(fragment);
     pintarFooter()
-    
-// agrego los productos al localStorage
+    //    localStorage.setItem("carrito", JSON.stringify(carrito));
 
-    localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
 
 let pintarFooter = () => { 
     //limpio
     footer.innerHTML = "";
-    //si esta vacio
+    // si esta vacio
     // if (Object.keys(carrito).length === 0) {
     //        //agrego el mensaje 
     //     footer.innerHTML = `
@@ -129,12 +121,10 @@ let pintarFooter = () => {
     //     `
     //     return
     // }
-     // aplico el operador avanzado &&
-     //aqui podria poner la libreria de alert
-    Object.keys(carrito).length === 0 && alert("Carrito vacío, Compre algun producto");
-
-
-        // sumo cantidad y sumo total
+     //aquien caso de que elija uno y mediante el boton eliminar producto quedaaria en 0 pero queda guardo el el storage entonces si es 0 lo saca
+    Object.keys(carrito).length === 0 &&   localStorage.setItem("carrito", JSON.stringify(carrito));
+    // sumar cantidad y sumar totales
+      
     let sumaCantidad = Object.values(carrito).reduce((acumulador, { cantidad }) => acumulador + cantidad,0);
     
     let sumaPrecio = Object.values(carrito).reduce((acumulador, { cantidad, precio }) => acumulador + cantidad * precio, 0);
@@ -146,10 +136,18 @@ let pintarFooter = () => {
     fragment.appendChild(clone);
     footer.appendChild(fragment);
 
-    let btnLimpiar = document.getElementById("vaciar-carrito")
+    let btnLimpiar = document.getElementById("vaciar-carrito");
     btnLimpiar.addEventListener("click", () => { 
         carrito = {};
+        localStorage.setItem("carrito", JSON.stringify(carrito));
         pintarCarrito();
+    })
+            // agrego los productos al localStorage
+    let btnGuardarCompra = document.getElementById("guardar-compra")
+    btnGuardarCompra.addEventListener("click", () => {
+    
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+            pintarCarrito();
     })
 }
 
@@ -159,7 +157,7 @@ let btnAcciones = e => {
     if (e.target.classList.contains("btn-info")) {
     
         let producto = carrito[e.target.dataset.id];
-        //operador ++
+
         producto.cantidad++;
 
         carrito[e.target.dataset.id] = {...producto};
@@ -167,9 +165,8 @@ let btnAcciones = e => {
     } 
     if (e.target.classList.contains("btn-danger")) { 
 
-        let producto = carrito[e.target.dataset.id];
-        
-         //operador --
+            let producto = carrito[e.target.dataset.id];
+
         producto.cantidad--;
 
         // if (producto.cantidad === 0) {
@@ -177,9 +174,10 @@ let btnAcciones = e => {
         // } else {
         //     carrito[e.target.dataset.id] = {...producto}
         // }
-        //aplico el operador terneario
+         //aplico el operador terneario
         producto.cantidad === 0 ? delete carrito[e.target.dataset.id] : carrito[e.target.dataset.id] = {...producto}
         pintarCarrito();
     }
     e.stopPropagation();
+
 }
