@@ -121,6 +121,16 @@ let pintarFooter = () => {
     //     `
     //     return
     // }
+    function mensajeSuccess() { 
+       Swal.fire({
+  position: 'top-center',
+  icon: 'success',
+           title: 'Compra Realizada Exitosamente!!!',
+  text: 'Dentro de las próximas 48hs hábiles le estaremos enviando sus productos. Muchas gracias por confiar en nosotros!',
+  showConfirmButton: false,
+  timer: 1500
+})
+} 
      //aquien caso de que elija uno y mediante el boton eliminar producto quedaaria en 0 pero queda guardo el el storage entonces si es 0 lo saca
     Object.keys(carrito).length === 0 &&   localStorage.setItem("carrito", JSON.stringify(carrito));
     // sumar cantidad y sumar totales
@@ -147,7 +157,8 @@ let pintarFooter = () => {
     btnGuardarCompra.addEventListener("click", () => {
     
         localStorage.setItem("carrito", JSON.stringify(carrito));
-            pintarCarrito();
+        pintarCarrito();
+        mensajeSuccess()
     })
 }
 
