@@ -241,17 +241,6 @@ function bebidasAlcoholicas() {
 
 
 
-       function eliminar() { 
-        let eliminar = prompt("Que nombre decea eliminar");
-        let resultaado = carrito.indexOf(eliminar)
-            if (resultaado != -1) {
-                carrito.splice(resultaado, 1)
-            }
-            else { 
-                alert("no se encontraron resultados")
-            }
-    }
-
 
 
 

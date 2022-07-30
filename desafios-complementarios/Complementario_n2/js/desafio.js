@@ -39,7 +39,8 @@ class Auto {
             Cantidad: ${this.cantidad}`);
     }
     iva() { 
-        let IVA = this.precio * 1.21;
+         let compra = this.precio * this.cantidad;
+        let IVA =compra* 1.21;
         return alert(`El producto  comprado" ${this.fabricante}, ${this.modelo}" con el IVA  su precio seria de ${IVA}`);
     }
     descuento() { 
@@ -75,10 +76,10 @@ while (ingresar == "SI" && (ingresar != "" || ingresar != "NO"||ingresar != 0)) 
             user.bienvenido();
             user.saludar();
         }
-        let compra = prompt(`¿si Desea  comprar un auto escriba   si/no ?`).toUpperCase();
+        let compra = prompt(`¿ Desea  comprar un auto escriba   si/no ?`).toUpperCase();
 
         
-        if (compra == "SI" && (compra != "" || compra != "NO")) {
+        while(compra == "SI" && (compra != "" || compra != "NO")) {
 
             let modelo = prompt("Ingrese el modelo del Auto");
             let fabricante = prompt("Ingrese el Fabricante del Auto ");
@@ -91,20 +92,20 @@ while (ingresar == "SI" && (ingresar != "" || ingresar != "NO"||ingresar != 0)) 
             if (modelo != "" && fabricante != "" && origen != ""
                 && color != "" && precio != "" && anio != "" && cantidad != "") {
                 
-                productos.push(new Auto(modelo, fabricante, origen, color, precio, anio, cantidad))
+                productos.push(new Auto(modelo, fabricante, origen, color, precio, anio, cantidad));
                 for (const producto of productos) {
                     producto.comprar();
                     producto.iva();
                     producto.descuento();
                 }
-            }
-
-        
-        }
-        else {
+            }else {
             alert("Para  ingresar debe complempletar los dos campo  requeridos anteriormente ")
         }
-        ingresar = prompt(`¿Si desea  salir escriba 0 ?`).toUpperCase();
+
+        compra = prompt(`¿si Desea vovler  comprar un auto escriba   si/no ?`).toUpperCase();
+        }
+        
+        ingresar = prompt(`¿Si desea crear otra cuenta escriba "SI", si desea  salir escriba "0"`).toUpperCase();
         for (const user of usuario) {
             user.salir();
         }
