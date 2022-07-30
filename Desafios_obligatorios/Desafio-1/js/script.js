@@ -1,4 +1,5 @@
 function login() {
+
     let nombre = prompt("introduzca su nombre").toLocaleUpperCase();
     let apellido = prompt(" introduzca su Apellido").toLocaleUpperCase();
     let terminos = confirm("Acepta los terminos y condiciones?");
@@ -25,12 +26,13 @@ function login() {
  // obtengo el parametro
 function tienda(user) { 
     
+    
     // aqui tenia un problema era que si no ponia ningun valor en login, igualmente se segui ejecutando el codigo, pero con Igualdad estricta y undefined evito el problema
     if (user !== undefined) { 
         
         let ingresar = prompt(` ${user}\n
         ¿Desea comprar si/no ?  `).toLocaleUpperCase();
-
+        
         while (ingresar == "SI" && (ingresar != "" || ingresar != "NO")) {
             secciones(user)
             ingresar =prompt(`¿Desea volver a comprar comprar si/no ?`).toLocaleUpperCase();
@@ -239,7 +241,16 @@ function bebidasAlcoholicas() {
 
 
 
-
+       function eliminar() { 
+        let eliminar = prompt("Que nombre decea eliminar");
+        let resultaado = carrito.indexOf(eliminar)
+            if (resultaado != -1) {
+                carrito.splice(resultaado, 1)
+            }
+            else { 
+                alert("no se encontraron resultados")
+            }
+    }
 
 
 
